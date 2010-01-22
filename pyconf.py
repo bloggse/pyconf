@@ -69,5 +69,7 @@ def load_dict(filename):
     return d
 
 if __name__ == "__main__":
+    import sys
     import doctest
-    doctest.testmod()
+    num_fail, num_run = doctest.testmod()
+    sys.exit(int(num_fail > 0))
