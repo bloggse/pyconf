@@ -71,5 +71,6 @@ def load_dict(filename):
 if __name__ == "__main__":
     import sys
     import doctest
-    num_fail, num_run = doctest.testmod()
-    sys.exit(int(num_fail > 0))
+    ret = doctest.testmod()
+    if ret[0]:
+        sys.exit(1)
