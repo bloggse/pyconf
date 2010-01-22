@@ -72,5 +72,5 @@ if __name__ == "__main__":
     import doctest
     import sys
     ret = doctest.testmod()
-    if res[0]:
+    if ret[0]:
         sys.exit(1)
