@@ -4,7 +4,7 @@ d = {}
 execfile("pyconf.py", d, d)
 long_desc = d["__doc__"]
 
-setup(name="pyconf", version="0.4-dev",
+setup(name="pyconf", version="0.4",
     url="http://blogg.se",
     description="Python-based configuration reader",
     long_description=long_desc,
