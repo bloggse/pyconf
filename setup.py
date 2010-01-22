@@ -9,5 +9,5 @@ setup(name="pyconf", version="0.4",
     description="Python-based configuration reader",
     long_description=long_desc,
     author="Blogg Esse AB",
-    author_email="software@blogg.se",
+    author_email="opensource@blogg.se",
     py_modules=["pyconf"])
