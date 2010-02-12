@@ -62,9 +62,9 @@ def load(filename=None, pkgname=None, conf_dir=None):
         raise ConfigurationError("no suitable loader for config module %r" %
             (filename,))
 
-def load_dict(filename):
+def load_dict(filename, pkgname=None):
     """Like `load`, but return a dict with the module's contents."""
-    d = vars(load(filename))
+    d = vars(load(filename, pkgname=pkgname))
     d.pop("__builtins__", None)
     return d
 
