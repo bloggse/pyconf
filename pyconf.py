@@ -12,16 +12,17 @@ in the module cache or otherwise bind it.
 
 And so on. You could also use `load_dict` to get a dict instead:
 
->>> type(load_dict(posixpath.__file__))
-<type 'dict'>
+>>> isinstance(load_dict(posixpath.__file__), dict)
+True
 
 Though, if you try to load files that aren't recognized or loadable, you get
 an error:
 
->>> load("lala.ini")
-Traceback (most recent call last):
-  ...
-ConfigurationError: no suitable loader for config module 'lala.ini'
+>>> try:
+...     load("lala.ini")
+... except ConfigurationError:
+...     print("ERROR")
+ERROR
 """
 
 import os
@@ -51,7 +52,7 @@ def load(filename=None, pkgname=None, conf_dir=None):
             filename = os.path.join(conf_dir, pkgname + ".conf.py")
     for (suffix, mode, type_) in imp.get_suffixes():
         if filename.endswith(suffix):
-            fp = file(filename, mode)
+            fp = open(filename, mode)
             desc = (suffix, mode, type_)
             try:
                 mod = imp.load_module("<config>", fp, filename, desc)
@@ -67,10 +68,3 @@ def load_dict(filename, pkgname=None):
     d = vars(load(filename, pkgname=pkgname))
     d.pop("__builtins__", None)
     return d
-
-if __name__ == "__main__":
-    import sys
-    import doctest
-    ret = doctest.testmod()
-    if ret[0]:
-        sys.exit(1)
