@@ -18,10 +18,11 @@ True
 Though, if you try to load files that aren't recognized or loadable, you get
 an error:
 
->>> load("lala.ini")
-Traceback (most recent call last):
-  ...
-pyconf.ConfigurationError: no suitable loader for config module 'lala.ini'
+>>> try:
+...     load("lala.ini")
+... except ConfigurationError:
+...     print("ERROR")
+ERROR
 """
 
 import os
@@ -67,10 +68,3 @@ def load_dict(filename, pkgname=None):
     d = vars(load(filename, pkgname=pkgname))
     d.pop("__builtins__", None)
     return d
-
-if __name__ == "__main__":
-    import sys
-    import doctest
-    ret = doctest.testmod()
-    if ret[0]:
-        sys.exit(1)
